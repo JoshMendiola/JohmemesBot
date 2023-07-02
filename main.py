@@ -1,6 +1,7 @@
 import random
-
 from instagrapi import Client
+from instagrapi.types import Usertag, Location
+
 hashtag = ["programming", "music"]
 comments = ["this is cool !!!", "this is neat!!!", "wow!!!"]
 client = Client()
@@ -24,7 +25,17 @@ def like_hashtags_and_follow():
             print(f"Commented {comment} under post number {i + 5}")
 
 
+def post_content():
+    tagged_user = client.user_info_by_username("luna.supern0va")
+    media = client.photo_upload(
+        path="photos/testimage.jpg",
+        caption="free me :(",
+        usertags=[Usertag(user=tagged_user, x=0.5, y=0.5)],
+        location=Location(name="Austin, Texas", lat= 30.22797618972211, lng=-97.75483341792386)
+    )
+
+
 if __name__ == '__main__':
     login()
-    like_hashtags_and_follow()
+    post_content()
 
